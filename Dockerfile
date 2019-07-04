@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.112
+FROM jenkins/jenkins:lts
 LABEL maintainer="mymail@gmail.com"
 ENV JAVA_OPTS="-Xmx8192m"
 ENV JENKINS_OPTS="--logfile=/var/log/jenkins/jenkins.log"
