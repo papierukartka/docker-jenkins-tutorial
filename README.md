@@ -74,6 +74,47 @@
 - remove
   - docker network rm jenkins-net
 
+### compose
+
+- docker-compose names containers in the following manner: `[project]_[service]_[instance]`. This should be considered, for example, in our jenkins.conf nginx configuration(proxy pass)
+- docker-compose has several API versions, the latest one being 3 atm.
+- if you don't define a network, docker-compose will create one for you.
+  - similarly, if any of defined volumes doesn't exist, docker-compose will create them
+- docker-compose.yml structure:
+
+```yaml
+version: '3'  # docker-compose API version
+volumes:  # docker volumes that should be made available
+  jenkins-data:
+  jenkins-log:
+services:  # section used to define container startup
+  master:  # service image corresponding to the `jenkins-master` container
+    build: ./jenkins-master  # contains a relative path to a Dockerfile defining jenkins-master image
+    ports:  # port mappings
+      - "50000:50000"
+    volumes:  # equivalent of `--mount` attribute
+      - jenkins-log:/var/log/jenkins
+      - jenkins-data:/var/jenkins_home
+    networks:  # contains a network name the container will be using
+      - jenkins-net
+```
+
+- build
+  - docker-compose build
+
+- spin things up
+  - docker-compose -p jenkins up -d
+    - **-p** - project name, in this case it's `jenkins`. It will be a prefix for all resources created with `docker-compose.yml`. If you don't provide this, a name will be derived from the folder `docker-compose.yml` is in
+    - **-d** - run as a daemon
+
+- see what's up
+  - docker-compose -p jenkins ps
+    - **ps** list of application containers
+
+- put things down
+  - docker compose -p jenkins down
+    - **-v** add this option at the end if you want volumes deleted too
+
 ## nginx
 
 ### nginx.conf file
