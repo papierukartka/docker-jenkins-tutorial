@@ -1,5 +1,14 @@
 # dockerized jenkins tutorial
 
+## Usage
+
+```bash
+docker-compose -p jenkins build
+docker-compose -p jenkins up -d
+```
+
+Accessible by entering localhost on port 80.
+
 ## Docker
 
 ### image
@@ -100,11 +109,11 @@ services:  # section used to define container startup
 ```
 
 - build
-  - `docker-compose build`
+  - `docker-compose -p jenkins build`
+    - **-p** - project name, in this case it's `jenkins`. It will be a prefix for all resources created with `docker-compose.yml`. If you don't provide this, a name will be derived from the folder `docker-compose.yml` is in
 
 - spin things up
   - `docker-compose -p jenkins up -d`
-    - **-p** - project name, in this case it's `jenkins`. It will be a prefix for all resources created with `docker-compose.yml`. If you don't provide this, a name will be derived from the folder `docker-compose.yml` is in
     - **-d** - run as a daemon
 
 - see what's up
@@ -114,6 +123,10 @@ services:  # section used to define container startup
 - put things down
   - `docker compose -p jenkins down`
     - **-v** add this option at the end if you want volumes deleted too
+
+### crawling for images
+
+- use hub.dockerhub.com to search for available tags (and corresponding Dockerfiles) and to find out what other images the image depends on
 
 ## nginx
 
@@ -127,9 +140,17 @@ services:  # section used to define container startup
 ### jenkins.conf file
 
 - must have settings:
-  - **proxy_pass http://jenkins-master:8080;** - this expects a domain name of jenkins-master to exist (docker networks) 
+  - **proxy_pass http://jenkins-master:8080;** - this expects a domain name of jenkins-master to exist (docker networks)
 
 ### spinning up
 
 - run nginx container on port 80 attached to jenkins-net
   - `docker run -p 80:80 --name=jenkins-nginx --network jenkins-net -d myjenkinsnginx`
+
+## files in jenkins-master
+
+This repository contains the following content from [jenkinsci docker repository](https://github.com/jenkinsci/docker.git)
+
+- `./install.plugins.sh`
+- `./jenkins-support`
+- `./plugins.sh`
