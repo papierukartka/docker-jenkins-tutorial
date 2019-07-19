@@ -62,7 +62,7 @@ RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
 # install Jenkins
 RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war \
- && echo "${JENKINS_SHA}  /usr/share/jenkins/jenkins.war" | sha256sum -c -
+    && echo "${JENKINS_SHA} /usr/share/jenkins/jenkins.war" | sha256sum -c -
 
 # prepare Jenkins directories
 RUN chown -R ${user} "$JENKINS_HOME" /usr/share/jenkins/ref
