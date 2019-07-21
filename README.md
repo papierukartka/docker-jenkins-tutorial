@@ -155,6 +155,13 @@ This repository contains the following content from [jenkinsci docker repository
 - `./jenkins-support`
 - `./plugins.sh`
 
+## jenkins-slave
+
+### files/resolv.conf
+
+- applied in case containers struggle to route or resolve DNS names correctly
+- uses google DNS servers by default.
+
 ## troubleshooting
 
 ### Failure in name resolution (no internet in container)

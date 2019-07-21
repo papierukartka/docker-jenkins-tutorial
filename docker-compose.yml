@@ -1,12 +1,4 @@
 version: '3'
-
-volumes:
-  jenkins-data:
-  jenkins-log:
-
-networks:
-  jenkins-net:
-
 services:
   master:
     build: ./jenkins-master
@@ -23,3 +15,20 @@ services:
       - "80:80"
     networks:
       - jenkins-net
+  slave:
+    build: ./jenkins-slave
+  proxy:
+    build: ./docker-proxy
+    command: -i
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      jenkins-net:
+        aliases:
+          - proxy1
+volumes:
+  jenkins-data:
+  jenkins-log:
+
+networks:
+  jenkins-net:
