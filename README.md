@@ -154,3 +154,22 @@ This repository contains the following content from [jenkinsci docker repository
 - `./install.plugins.sh`
 - `./jenkins-support`
 - `./plugins.sh`
+
+## troubleshooting
+
+### Failure in name resolution (no internet in container)
+
+- Add dns resolver to your docker config (/etc/docker/daemon.json)
+  - This file might not exist. If that's the case, just create it.
+
+```json
+{
+  "dns": ["8.8.8.8"]
+}
+```
+
+- Restart docker daemon
+
+```bash
+sudo service docker restart
+```
