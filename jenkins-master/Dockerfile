@@ -25,12 +25,12 @@ ARG uid=1000
 ARG gid=1000
 ARG http_port=8080
 ARG agent_port=50000
-ARG JENKINS_VERSION=2.161
+ARG JENKINS_VERSION=2.177
 ARG TINI_VERSION=v0.17.0
 
 # jenkins.war checksum, download will be validated using it.
 # List of available jenkins.war & checksums: http://mirrors.jenkins.io/war/
-ARG JENKINS_SHA=e026221efcec9528498019b6c1581cca70fe9c3f6b10303777d85c6699bca0e4
+ARG JENKINS_SHA=b39f51c10dd04f53d41dc4f359dad8731aea9ea12c6be7e7e76452b5c54b8a2e
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
 

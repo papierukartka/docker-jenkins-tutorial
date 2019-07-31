@@ -3,3 +3,8 @@ jclouds-jenkins
 token-macro
 durable-task
 docker-plugin
+workflow-aggregator
+job-dsl
+pipeline-stage-step
+workflow-durable-task-step
+workflow-basic-steps
